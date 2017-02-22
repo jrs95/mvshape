@@ -12,3 +12,4 @@ This package is used to assess the shape of the relationship between an exposure
 # Example
 
 # Reference 
+Please cite this R package in the following way: https://github.com/jrs95/mvshape
