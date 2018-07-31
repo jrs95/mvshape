@@ -1,5 +1,5 @@
 # mvshape
-This package is used to assess the shape of the relationship between an exposure and an outcome using multivariate meta-analysis. This package is currently under development. 
+This package is used to assess the shape of the relationship between an exposure and an outcome using fractional polynomials and multivariate meta-analysis. 
 
 # Functions
 
