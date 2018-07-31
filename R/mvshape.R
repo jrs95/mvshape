@@ -10,6 +10,15 @@
 #' @param covar data.frame with covariates.
 #' @param family the glm family (options: gaussian and binomial).
 #' @return List of best fitting polynomials of degrees 1 and 2 as well as associated statistics.
+#' @return \item{power_d1}{power of the best-fitting fractional polynomial of degree 1}
+#' @return \item{fp1}{model of the best-fitting fractional polynomial of degree 1}
+#' @return \item{power_d2}{powers of the best-fitting fractional polynomial of degree 2}
+#' @return \item{fp2}{model of the best-fitting fractional polynomial of degree 2}
+#' @return \item{p_d1}{p-value testing the best-fitting fractional polynomial of degree 1 against the linear model}
+#' @return \item{p_d2}{p-value testing the best-fitting fractional polynomial of degree 2 against the best-fitting fractional polynomial of degree 2}
+#' @return \item{xmin}{miniumum value of the exposure}
+#' @return \item{xmax}{maximum value of the exposure}
+#' @return \item{family}{family used in the analysis}
 #' @examples
 #' ### Data
 #' y <- rnorm(5000)
@@ -60,7 +69,7 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
   likelihood_d2 <- NULL
   powers1 <- c(-2, -1, -0.5, 0, 0.5, 1, 2, 3)
   powers2 <- c(-2, -1, -0.5, 0, 0.5, 1, 2, 3)
-  powers_d2 <- data.frame(p1=NULL, p2=NULL)
+  power_d2 <- data.frame(p1=NULL, p2=NULL)
   
   for(pi1 in powers1){
     if(pi1==0){xfp1 <- log(x)}else{xfp1 <- x^pi1}
@@ -71,18 +80,18 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
       if(pi1==-2 & pi2==-2){fp2 <- model}
       else{if(logLik(model)>=max(likelihood_d2)){fp2 <- model}}
       likelihood_d2 <- c(likelihood_d2, logLik(model))
-      powers_d2 <- rbind(powers_d2, data.frame(p1=pi1, p2=pi2)) 
+      power_d2 <- rbind(power_d2, data.frame(p1=pi1, p2=pi2)) 
     }
     powers2 <- powers2[-1]
   }
   
   maxlik_d2 <- max(likelihood_d2)
-  powers_bfp2 <- powers_d2[which.max(rank(likelihood_d2, ties.method = "last", na.last=FALSE)),]
+  powers_bfp2 <- power_d2[which.max(rank(likelihood_d2, ties.method = "last", na.last=FALSE)),]
   chi2 <- (-2*maxlik_d1) - (-2*maxlik_d2)
   p_d2 <- 1 - pchisq(chi2,df=2)
   
   # Results
-  results <- list(power_d1=power_bfp1, fp1=fp1, powers_d2=powers_bfp2, fp2=fp2, p_d1=p_d1, p_d2=p_d2, xmin=min(x), xmax=max(x), family=family)
+  results <- list(power_d1=power_bfp1, fp1=fp1, power_d2=powers_bfp2, fp2=fp2, p_d1=p_d1, p_d2=p_d2, xmin=min(x), xmax=max(x), family=family)
   class(results) <- "fracpoly"
   
   # Return
@@ -103,7 +112,7 @@ print.fracpoly <- function(x, ...){
   cat("\nCoefficients:\n", sep="")
   cat(x$fp1$coef)
   cat("\n\nBest-fitting fractional polynomial of degree 2", sep="")
-  cat("\nPowers:",as.vector(unlist(x$powers_d2)),"\n", sep=" ")
+  cat("\nPowers:",as.vector(unlist(x$power_d2)),"\n", sep=" ")
   cat("\nCoefficients:\n", sep="")
   cat(x$fp2$coef)
   cat("\n\n")
@@ -121,7 +130,7 @@ summary.fracpoly <- function(x, ...){
   cat("\nPower: ",x$power_d1,"\n", sep="")
   print(summary(x$fp1), row.names = FALSE)
   cat("\nBest-fitting fractional polynomial of degree 2", sep="")
-  cat("\nPowers:",as.vector(unlist(x$powers_d2)),"\n", sep=" ")
+  cat("\nPowers:",as.vector(unlist(x$power_d2)),"\n", sep=" ")
   print(summary(x$fp2), row.names = FALSE)
 }
 
@@ -142,6 +151,11 @@ summary.fracpoly <- function(x, ...){
 #' @param float floating point variances.
 #' @param method meta-analysis method.
 #' @return List of multivariate meta-analysis results for each group.
+#' @return \item{results}{data.frame of results: q is the quantile group, xbeta is the mean of x in each quantile, xse is the standard error of the mean of x in each quantile, beta is the regression coefficient of association between y and each quantile of x, se is the standard error of the regression coefficient of association between y and each quantile of x}
+#' @return \item{varcor}{variance-covariance matrix}
+#' @return \item{xmin}{miniumum value of the exposure}
+#' @return \item{xmax}{maximum value of the exposure}
+#' @return \item{family}{family used in the analysis}
 #' @examples
 #' ### Data
 #' y <- rnorm(5000)
