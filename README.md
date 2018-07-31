@@ -2,8 +2,11 @@
 This package is used to assess the shape of the relationship between an exposure and an outcome using fractional polynomials and multivariate meta-analysis. 
 
 # Functions
-* frac_poly_mr - this method performs IV analysis using fractional polynomials 
-* piecewise_mr - this method performs IV analysis using piecewise linear function
+* fracpoly - this method fits the best-fitting fractional polynomial of degree 1 and/or 2    
+* mvshape - this method performs multi-variate meta-analysis for  
+* fracploy_plot - this method performs multi-variate meta-analysis for  
+* mvshape_plot - this method performs multi-variate meta-analysis for  
+* fracpoly_mvshape_plot - this method performs multi-variate meta-analysis for
 
 # Installation
 1. install.packages("devtools")
