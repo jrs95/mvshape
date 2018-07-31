@@ -2,6 +2,8 @@
 This package is used to assess the shape of the relationship between an exposure and an outcome using fractional polynomials and multivariate meta-analysis. 
 
 # Functions
+* frac_poly_mr - this method performs IV analysis using fractional polynomials 
+* piecewise_mr - this method performs IV analysis using piecewise linear function
 
 # Installation
 1. install.packages("devtools")
