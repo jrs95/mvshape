@@ -616,7 +616,7 @@ fracpoly_mvshape_plot <- function(fracpoly, degree="both", mvshape, xref=NULL, l
   
   # Family
   family <- fracpoly$family
-  family_mvshape <- fracpoly$family
+  family_mvshape <- mvshape$family
   if(family!=family_mvshape) stop("the family used in the fractional polynomial analysis is not the same as the family used in the mvshape analysis")
   
   # Fractional polynomial plot
