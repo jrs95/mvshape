@@ -17,6 +17,24 @@ fracpoly(y = y, x = x, covar = NULL, family = "gaussian")
 }
 \value{
 List of best fitting polynomials of degrees 1 and 2 as well as associated statistics.
+
+\item{power_d1}{power of the best-fitting fractional polynomial of degree 1}
+
+\item{fp1}{model of the best-fitting fractional polynomial of degree 1}
+
+\item{power_d2}{powers of the best-fitting fractional polynomial of degree 2}
+
+\item{fp2}{model of the best-fitting fractional polynomial of degree 2}
+
+\item{p_d1}{p-value testing the best-fitting fractional polynomial of degree 1 against the linear model}
+
+\item{p_d2}{p-value testing the best-fitting fractional polynomial of degree 2 against the best-fitting fractional polynomial of degree 2}
+
+\item{xmin}{miniumum value of the exposure}
+
+\item{xmax}{maximum value of the exposure}
+
+\item{family}{family used in the analysis}
 }
 \description{
 fracpoly fits the best fitting fractional polynomial of degree 1 and 2.

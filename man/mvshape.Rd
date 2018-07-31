@@ -28,6 +28,16 @@ mvshape(y = y, x = x, covar = NULL, study = NULL, ngrp = 10,
 }
 \value{
 List of multivariate meta-analysis results for each group.
+
+\item{results}{data.frame of results: q is the quantile group, xbeta is the mean of x in each quantile, xse is the standard error of the mean of x in each quantile, beta is the regression coefficient of association between y and each quantile of x, se is the standard error of the regression coefficient of association between y and each quantile of x}
+
+\item{varcor}{variance-covariance matrix}
+
+\item{xmin}{miniumum value of the exposure}
+
+\item{xmax}{maximum value of the exposure}
+
+\item{family}{family used in the analysis}
 }
 \description{
 mvshape fits a multivariate meta-analysis for groups of the exposure (e.g. deciles).
