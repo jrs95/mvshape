@@ -482,6 +482,7 @@ fracpoly_plot <- function(fracpoly, degree="both", xref=NULL, logx=FALSE, logy=F
     if(logx==T){data$x <- exp(data$x); xminp <- exp(xminp); xmaxp <- exp(xmaxp)}
     data$xminp <- xminp; data$xmaxp <- xmaxp
     hline <- data.frame(x=c((xminp-0.1*xminp), (xmaxp+0.1*xmaxp)), y=c(yintr, yintr))
+    pref_y <- paste0("Odds ratio of ", pref_y)
 
     # Figure
     figure <- ggplot(data, aes(x=x))
@@ -558,7 +559,7 @@ mvshape_plot <- function(mvshape, logx=FALSE, logy=FALSE, pref_x="x", pref_y="y"
   xminp <- mvshape[[3]]; xmaxp <- mvshape[[4]]; yintr <- 0
   if(!is.null(xlim)){xminp <- xlim[1]; xmaxp <- xlim[2]}
   data <- data.frame(xest=xest, yest=yest, ylci=ylci, yuci=yuci) 
-  if(family=="binomial"){logy <- T}
+  if(family=="binomial"){logy <- T; pref_y <- paste0("Odds ratio of ", pref_y)}
   if(logy==T){data$yest <- exp(data$yest); data$yuci <- exp(data$yuci); data$ylci <- exp(data$ylci); yintr <- 1}
   if(logx==T){data$xest <- exp(data$xest); xminp <- exp(xminp); xmaxp <- exp(xmaxp)}
   hline <- data.frame(x=c((xminp-0.1*xminp), (xmaxp+0.1*xmaxp)), y=c(yintr, yintr))
@@ -714,7 +715,7 @@ fracpoly_mvshape_plot <- function(fracpoly, degree="both", mvshape, xref=NULL, l
       ylci <- yest - 1.96*yse
       yuci <- yest + 1.96*yse
     }
-    hlinep <- TRUE
+    hlinep <- TRUE; pref_y <- paste0("Odds ratio of ", pref_y)
   }
   data <- data.frame(x=x, yest=yest, yse=yse, ylci=ylci, yuci=yuci)
   xminp <- fracpoly[[7]]; xmaxp <- fracpoly[[8]]; yintr <- 0
