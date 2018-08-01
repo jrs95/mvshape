@@ -23,10 +23,12 @@ c2 <- rnorm(5000)
 study <- as.factor(c(rep("study1",1000),rep("study2",1000),rep("study3",1000),rep("study4",1000),rep("study5",1000)))  
 covar <- data.frame(c1=c1, c2=c2, study=study)  
 
-
 \#\#\# Analyses  
 fp <- fracpoly(y=y, x=x, covar=covar, family="gaussian")  
-mvma <- mvshape(y=y, x=x, covar=covar[,c("c1", "c2")], study=study, family="gaussian")
+fracpoly_plot(fp)  
+mvma <- mvshape(y=y, x=x, covar=covar[,c("c1", "c2")], study=study, family="gaussian")  
+mvshape_plot(mvma)  
+fracpoly_mvshape_plot(fracpoly=fp, mvshape=mvma)
 
 # Reference 
 Please cite this R package using the link: https://github.com/jrs95/mvshape
