@@ -24,7 +24,7 @@ study <- as.factor(c(rep("study1",1000),rep("study2",1000),rep("study3",1000),re
 covar <- data.frame(c1=c1, c2=c2, study=study)  
 
 
-\#\#\# Analyses
+\#\#\# Analyses  
 fp <- fracpoly(y=y, x=x, covar=covar, family="gaussian")  
 mvma <- mvshape(y=y, x=x, covar=covar[,c("c1", "c2")], study=study, family="gaussian")
 
