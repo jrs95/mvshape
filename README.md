@@ -15,6 +15,17 @@ This package is used to assess the shape of the relationship between an exposure
 4. library(mvshape)
 
 # Example
+### Data
+y <- rnorm(5000)  
+x <- rnorm(5000,10,1)  
+c1 <- rbinom(5000,1,0.5)  
+c2 <- rnorm(5000)  
+covar <- data.frame(c1=c1, c2=c2)  
+study <- c(rep("study1",1000),rep("study2",1000),rep("study3",1000),rep("study4",1000),rep("study5",1000))  
+
+### Analyses
+fp <- fracpoly(y=y, x=x, covar=covar, family="gaussian")  
+mvma <- mvshape(y=y, x=x, covar=covar, study=study, family="gaussian")
 
 # Reference 
 Please cite this R package using the link: https://github.com/jrs95/mvshape
