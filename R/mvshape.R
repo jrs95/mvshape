@@ -141,6 +141,7 @@ summary.fracpoly <- function(x, ...){
 #' mvshape
 #'
 #' mvshape fits a multivariate meta-analysis for groups of the exposure (e.g. deciles).
+#' @import mvmeta
 #' @param y outcome.
 #' @param x exposure.
 #' @param covar data.frame with covariates.
@@ -233,7 +234,7 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
     names(x_var)<- paste0("cov_",1:length(x_var))
   }
   
-  if(length(levels)>1){
+  if(length(levels(study))>1){
     
     # Outcome mvmeta
     est <- as.matrix(est); class(est) <- "numeric"
