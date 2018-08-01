@@ -9,7 +9,7 @@
 #' @param x exposure.
 #' @param covar data.frame with covariates.
 #' @param family the glm family (options: gaussian and binomial).
-#' @return List of best fitting polynomials of degrees 1 and 2 as well as associated statistics.
+#' @return List of best-fitting polynomials of degrees 1 and 2 as well as associated statistics.
 #' @return \item{power_d1}{power of the best-fitting fractional polynomial of degree 1}
 #' @return \item{fp1}{model of the best-fitting fractional polynomial of degree 1}
 #' @return \item{power_d2}{powers of the best-fitting fractional polynomial of degree 2}
@@ -206,6 +206,7 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
   est_var <- data.frame()
   x_mean <- data.frame()
   x_var <- data.frame()
+
   for(coh in levels(study)){
     
     # Outcome estimates
@@ -232,6 +233,7 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
     v_mean <- varcov_mean[lower.tri(varcov_mean, diag = TRUE)]
     x_var <- rbind(x_var, v_mean)
     names(x_var)<- paste0("cov_",1:length(x_var))
+    
   }
   
   if(length(levels(study))>1){
@@ -240,9 +242,9 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
     est <- as.matrix(est); class(est) <- "numeric"
     est_var <- as.matrix(est_var); class(est_var) <- "numeric"
     mvmodel <- suppressWarnings(mvmeta(est,est_var,method=method))
-  
+    
     if(family=="gaussian"){
-      beta <- mvmodel$coef
+      beta <- c(mvmodel$coef)
       se <- c(summary(mvmodel)$coefficients[,2]); names(se) <- NULL
       varcov <- vcov(mvmodel); row.names(varcov) <- paste0("q_", levels(xq)); colnames(varcov) <- paste0("q_", levels(xq))
     }else{
@@ -265,7 +267,7 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
     
     # Outcome model
     if(family=="gaussian"){
-      beta <- model$coef[1:ngrp]
+      beta <- c(model$coef[1:ngrp])
       se <- c(summary(model)$coefficients[1:ngrp,2]); names(se) <- NULL
       varcov <- varcov <- vcov(model)[1:ngrp,1:ngrp]; row.names(varcov) <- paste0("q_", levels(xq)); colnames(varcov) <- paste0("q_", levels(xq))
     }else{
@@ -278,7 +280,7 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
     # Exposure mean
     xbeta <- c(model_mean$coef); names(xbeta) <- NULL
     xse <- c(summary(model_mean)$coefficients[,2]); names(xse) <- NULL
-
+    
   }
   
   # Results
