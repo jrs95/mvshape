@@ -15,7 +15,7 @@ This package is used to assess the shape of the relationship between an exposure
 4. library(mvshape)
 
 # Example
-\#\#\# Data
+\#\#\# Data  
 y <- rnorm(5000)  
 x <- rnorm(5000,10,1)  
 c1 <- rbinom(5000,1,0.5)  
