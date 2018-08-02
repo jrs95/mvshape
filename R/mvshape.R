@@ -43,7 +43,7 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
   if(!(family=="gaussian" | family=="binomial")) stop("The generalised linear model has to be either binomial or gaussian")
   
   # Remove missing values
-  if(is.null(covar)){missing <- is.na(y) | is.na(x)}else{missing <- is.na(y) | is.na(x) | apply(is.na(covar),1,sum)>0}
+  if(is.null(covar)){missing <- is.na(y) | is.na(x)}else{missing <- is.na(y) | is.na(x) | apply(is.na(covar),1,any)}
   y <- y[!missing]
   x <- x[!missing]
   if(!is.null(covar)){covar_names <- names(covar); covar <- as.data.frame(covar[!missing,]); names(covar) <- covar_names}
