@@ -44,6 +44,7 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
   
   # Remove missing values
   if(is.null(covar)){missing <- is.na(y) | is.na(x)}else{missing <- is.na(y) | is.na(x) | apply(is.na(covar),1,any)}
+  if(length(y)!=length(missing)) stop("the size of the outcome is not equal to the size of the missing variable")
   y <- y[!missing]
   x <- x[!missing]
   if(!is.null(covar)){covar_names <- names(covar); covar <- as.data.frame(covar[!missing,]); names(covar) <- covar_names}
@@ -188,7 +189,8 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
   if(!(family=="gaussian" | family=="binomial")) stop("the generalised linear model has to be either binomial or gaussian")
 
   # Remove missing values
-  if(length(covar)==0){missing <- is.na(y) | is.na(x)}else{missing <- is.na(y) | is.na(x) | apply(is.na(covar),1,sum)>0}
+  if(length(covar)==0){missing <- is.na(y) | is.na(x)}else{missing <- is.na(y) | is.na(x) | apply(is.na(covar),1,any)}
+  if(length(y)!=length(missing)) stop("the size of the outcome is not equal to the size of the missing variable")
   y <- y[!missing]
   x <- x[!missing]
   if(!is.null(covar)){covar_names <- names(covar); covar <- as.data.frame(covar[!missing,]); names(covar) <- covar_names}
