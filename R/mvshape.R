@@ -62,7 +62,7 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
   }
   
   maxlik_d1 <- max(likelihood_d1)
-  power_bfp1 <- powers[which.max(rank(likelihood_d1, ties.method = "last", na.last=FALSE))]
+  power_bfp1 <- powers[which.max(rank(likelihood_d1, ties.method = "first", na.last=FALSE))]
   chi2 <- (-2*likelihood_d1[6]) - (-2*maxlik_d1)
   p_d1 <- 1 - pchisq(chi2, df=1)
   
@@ -87,7 +87,7 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
   }
   
   maxlik_d2 <- max(likelihood_d2)
-  powers_bfp2 <- power_d2[which.max(rank(likelihood_d2, ties.method = "last", na.last=FALSE)),]
+  powers_bfp2 <- power_d2[which.max(rank(likelihood_d2, ties.method = "first", na.last=FALSE)),]
   chi2 <- (-2*maxlik_d1) - (-2*maxlik_d2)
   p_d2 <- 1 - pchisq(chi2,df=2)
   
