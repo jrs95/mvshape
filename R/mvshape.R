@@ -197,7 +197,7 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
   if(!is.null(study)){study <- study[!missing]; study <- as.factor(study)}else{study <- as.factor(rep("study",length(y)))}
   
   # Quantiles
-  prob <- (100/ngrp)/100
+  prob <- 1/ngrp
   quantiles <- quantile(x, probs=seq(0,1, prob))
   xq <- cut(x, quantiles, include.lowest=T)
   xq <- factor(as.numeric(xq))
