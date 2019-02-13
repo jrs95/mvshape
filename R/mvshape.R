@@ -214,10 +214,12 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
     # Outcome estimates
     if(!is.null(covar)){model <- glm(y[study==coh] ~ xq[study==coh], family=family)}else{covar_coh <- as.data.frame(covar[study==coh,]); names(covar_coh) <- covar_names; model <- glm(y[study==coh] ~ xq[study==coh] + ., data=covar_coh, family=family)}
     if(family=="gaussian"){
+      if(any(is.na(model$coef))) stop("there are missing regression coefficients") 
       b <- model$coef[1:ngrp]
       varcov <- vcov(model)[1:ngrp,1:ngrp]
       v <- varcov[lower.tri(varcov, diag = TRUE)]
     }else{
+      if(any(is.na(model$coef))) stop("there are missing regression coefficients") 
       b <- model$coef[2:ngrp]
       varcov <- vcov(model)[2:ngrp,2:ngrp]
       v <- varcov[lower.tri(varcov, diag = TRUE)]
@@ -229,6 +231,7 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
     
     # Exposure means
     model_mean <- lm(x[study==coh]~xq[study==coh] - 1)
+    if(any(is.na(model_mean$coef))) stop("there are missing mean exposure estimates")     
     x_mean <- rbind(x_mean, model_mean$coef)
     names(x_mean)<- paste0("mean_",1:length(x_mean))
     varcov_mean <- vcov(model)
@@ -246,10 +249,12 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
     mvmodel <- suppressWarnings(mvmeta(est,est_var,method=method))
     
     if(family=="gaussian"){
+      if(length(mvmodel$coef)!=ngrp | any(is.na(mvmodel$coef))) stop("there are missing mvmeta coefficients")
       beta <- c(mvmodel$coef)
       se <- c(summary(mvmodel)$coefficients[,2]); names(se) <- NULL
       varcov <- vcov(mvmodel); row.names(varcov) <- paste0("q_", levels(xq)); colnames(varcov) <- paste0("q_", levels(xq))
     }else{
+      if(length(mvmodel$coef)!=(1-ngrp) | any(is.na(mvmodel$coef))) stop("there are missing mvmeta coefficients")
       beta <- c(0,mvmodel$coef)
       se <- c(0,summary(mvmodel)$coefficients[,2]); names(se) <- NULL
       if(float==TRUE){se <- sqrt(floatvar(vcov(mvmodel))$variance); names(se) <- NULL}
