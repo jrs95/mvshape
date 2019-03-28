@@ -81,7 +81,7 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
       if(pi1==-2 & pi2==-2){fp2 <- model; powers_bfp2 <- c(pi1, pi2)}
       else{if(logLik(model)>=max(likelihood_d2)){fp2 <- model; powers_bfp2 <- c(pi1, pi2)}}
       likelihood_d2 <- c(likelihood_d2, logLik(model))
-      power_d2 <- rbind(power_d2, data.frame(p1=pi1, p2=pi2)) 
+      # power_d2 <- rbind(power_d2, data.frame(p1=pi1, p2=pi2)) 
     }
     powers2 <- powers2[-1]
   }
