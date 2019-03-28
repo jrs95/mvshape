@@ -56,13 +56,13 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
   for(pi in powers){
     if(pi==0){xfp <- log(x)}else{xfp <- x^pi}
     if(length(covar)==0){model <- glm(y~xfp, family=family)}else{model <- glm(y~xfp + ., data=covar, family=family)}
-    if(pi==-2){fp1 <- model}
-    else{if(logLik(model)>=max(likelihood_d1)){fp1 <- model}}
+    if(pi==-2){fp1 <- model; power_bfp1 <- pi}
+    else{if(logLik(model)>=max(likelihood_d1)){fp1 <- model; power_bfp1 <- pi}}
     likelihood_d1 <- c(likelihood_d1, logLik(model)) 
   }
   
   maxlik_d1 <- max(likelihood_d1)
-  power_bfp1 <- powers[which.max(rank(likelihood_d1, ties.method = "first", na.last=FALSE))]
+  # power_bfp1 <- powers[which.max(rank(likelihood_d1, ties.method = "first", na.last=FALSE))]
   chi2 <- (-2*likelihood_d1[6]) - (-2*maxlik_d1)
   p_d1 <- 1 - pchisq(chi2, df=1)
   
@@ -70,7 +70,7 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
   likelihood_d2 <- NULL
   powers1 <- c(-2, -1, -0.5, 0, 0.5, 1, 2, 3)
   powers2 <- c(-2, -1, -0.5, 0, 0.5, 1, 2, 3)
-  power_d2 <- data.frame(p1=NULL, p2=NULL)
+  # power_d2 <- data.frame(p1=NULL, p2=NULL)
   
   for(pi1 in powers1){
     if(pi1==0){xfp1 <- log(x)}else{xfp1 <- x^pi1}
@@ -78,8 +78,8 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
       if(pi1==pi2){if(pi2==0){xfp2 <- log(x)*log(x)}else{xfp2 <- x^pi2*log(x)}}
       else{if(pi2==0){xfp2 <- log(x)}else{xfp2 <- x^pi2}}
       if(length(covar)==0){model <- glm(y~xfp1 + xfp2, family=family)}else{model <- glm(y~xfp1 + xfp2 + ., data=covar, family=family)}
-      if(pi1==-2 & pi2==-2){fp2 <- model}
-      else{if(logLik(model)>=max(likelihood_d2)){fp2 <- model}}
+      if(pi1==-2 & pi2==-2){fp2 <- model; powers_bfp2 <- c(pi1, pi2)}
+      else{if(logLik(model)>=max(likelihood_d2)){fp2 <- model; powers_bfp2 <- c(pi1, pi2)}}
       likelihood_d2 <- c(likelihood_d2, logLik(model))
       power_d2 <- rbind(power_d2, data.frame(p1=pi1, p2=pi2)) 
     }
@@ -87,7 +87,7 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
   }
   
   maxlik_d2 <- max(likelihood_d2)
-  powers_bfp2 <- power_d2[which.max(rank(likelihood_d2, ties.method = "first", na.last=FALSE)),]
+  # powers_bfp2 <- power_d2[which.max(rank(likelihood_d2, ties.method = "first", na.last=FALSE)),]
   chi2 <- (-2*maxlik_d1) - (-2*maxlik_d2)
   p_d2 <- 1 - pchisq(chi2,df=2)
   
