@@ -57,7 +57,7 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
     if(pi==0){xfp <- log(x)}else{xfp <- x^pi}
     if(length(covar)==0){model <- glm(y~xfp, family=family)}else{model <- glm(y~xfp + ., data=covar, family=family)}
     if(pi==-2){fp1 <- model}
-    else{if(logLik(model)>max(likelihood_d1)){fp1 <- model}}
+    else{if(logLik(model)>=max(likelihood_d1)){fp1 <- model}}
     likelihood_d1 <- c(likelihood_d1, logLik(model)) 
   }
   
@@ -79,7 +79,7 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
       else{if(pi2==0){xfp2 <- log(x)}else{xfp2 <- x^pi2}}
       if(length(covar)==0){model <- glm(y~xfp1 + xfp2, family=family)}else{model <- glm(y~xfp1 + xfp2 + ., data=covar, family=family)}
       if(pi1==-2 & pi2==-2){fp2 <- model}
-      else{if(logLik(model)>max(likelihood_d2)){fp2 <- model}}
+      else{if(logLik(model)>=max(likelihood_d2)){fp2 <- model}}
       likelihood_d2 <- c(likelihood_d2, logLik(model))
       power_d2 <- rbind(power_d2, data.frame(p1=pi1, p2=pi2)) 
     }
