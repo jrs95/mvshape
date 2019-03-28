@@ -5,14 +5,10 @@ Date: 11-07-2018
 Author: James Staley
 Maintainer: James Staley <js16174@bristol.ac.uk>
 Description: mvshape performs fractional polynomial analyses (adjusted for study) and multivariate meta-analysis as well as data visualization
-Depends:
-    R (>= 3.2.0),
-    methods
+Depends: R (>= 3.2.0), methods
 License: GPL (>= 2)
 ByteCompile: TRUE
 LazyData: TRUE
 Encoding: UTF-8
-Imports: 
-    mvmeta,
-    ggplot2
+Imports: mvmeta, ggplot2
 RoxygenNote: 6.0.1.9000
