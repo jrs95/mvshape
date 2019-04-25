@@ -38,6 +38,7 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
   if(length(y)!=length(x) | (if(!is.null(covar)){(nrow(covar)!=length(y))}else{FALSE})) stop("the size of the outcome is not equal to the size of the exposure or covariates")
   if(!is.null(covar)){
     if(!is.data.frame(covar)) stop("the covar object is not a data.frame")
+    if(any(names(covar) %in% c("y", "x"))) stop("do not call covariates 'y' or 'x'")
   }
   if(any(x<=0)) stop("The values of x are not all positive")
   if(!(family=="gaussian" | family=="binomial")) stop("The generalised linear model has to be either binomial or gaussian")
@@ -181,6 +182,7 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
   if(length(y)!=length(x) | (if(!is.null(covar)){(nrow(covar)!=length(y))}else{FALSE})) stop("the size of the outcome is not equal to the size of the exposure or covariates")
   if(!is.null(covar)){
     if(!is.data.frame(covar)) stop("the covar object is not a data.frame")
+    if(any(names(covar) %in% c("y", "x"))) stop("do not call covariates 'y' or 'x'")
   }
   if(!is.null(study)){if(length(y)!=length(study)) stop("the size of the outcome is not equal to the size of the study variable")}
   if(!is.null(study)){if(any(is.na(study))) stop("there are NAs in the study variable")}
