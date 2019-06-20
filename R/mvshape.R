@@ -182,7 +182,7 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
   if(length(y)!=length(x) | (if(!is.null(covar)){(nrow(covar)!=length(y))}else{FALSE})) stop("the size of the outcome is not equal to the size of the exposure or covariates")
   if(!is.null(covar)){
     if(!is.data.frame(covar)) stop("the covar object is not a data.frame")
-    if(any(names(covar) %in% c("y", "x"))) stop("do not call covariates 'y' or 'x'")
+    if(any(names(covar) %in% c("y", "x", "xq"))) stop("do not call covariates 'y', 'x' or 'xq'")
   }
   if(!is.null(study)){if(length(y)!=length(study)) stop("the size of the outcome is not equal to the size of the study variable")}
   if(!is.null(study)){if(any(is.na(study))) stop("there are NAs in the study variable")}
