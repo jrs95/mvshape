@@ -48,7 +48,7 @@ fracpoly <- function(y=y, x=x, covar=NULL, family="gaussian"){
   if(length(y)!=length(missing)) stop("the size of the outcome is not equal to the size of the missing variable")
   y <- y[!missing]
   x <- x[!missing]
-  if(!is.null(covar)){covar_names <- names(covar); covar <- as.data.frame(covar[!missing,]); names(covar) <- covar_names}
+  if(!is.null(covar)){covar_names <- names(covar); covar <- as.data.frame(covar[!missing,,drop=F]); names(covar) <- covar_names}
   
   # FP degree 1
   likelihood_d1 <- NULL
@@ -195,7 +195,7 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
   if(length(y)!=length(missing)) stop("the size of the outcome is not equal to the size of the missing variable")
   y <- y[!missing]
   x <- x[!missing]
-  if(!is.null(covar)){covar_names <- names(covar); covar <- as.data.frame(covar[!missing,]); names(covar) <- covar_names}
+  if(!is.null(covar)){covar_names <- names(covar); covar <- as.data.frame(covar[!missing,,drop=F]); names(covar) <- covar_names}
   if(!is.null(study)){study <- study[!missing]; study <- as.factor(study)}else{study <- as.factor(rep("study",length(y)))}
   
   # Quantiles
@@ -214,7 +214,7 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
   for(coh in levels(study)){
     
     # Outcome estimates
-    if(!is.null(covar)){model <- glm(y[study==coh] ~ xq[study==coh], family=family)}else{covar_coh <- as.data.frame(covar[study==coh,]); names(covar_coh) <- covar_names; model <- glm(y[study==coh] ~ xq[study==coh] + ., data=covar_coh, family=family)}
+    if(!is.null(covar)){model <- glm(y[study==coh] ~ xq[study==coh], family=family)}else{covar_coh <- as.data.frame(covar[study==coh,,drop=F]); names(covar_coh) <- covar_names; model <- glm(y[study==coh] ~ xq[study==coh] + ., data=covar_coh, family=family)}
     if(family=="gaussian"){
       if(any(is.na(model$coef))) stop("there are missing regression coefficients") 
       b <- model$coef[1:ngrp]
