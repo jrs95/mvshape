@@ -20,5 +20,5 @@ List of floating point variances, error limits and divergence parameters.
 floatvar fits the best fitting fractional polynomial of degree 1 and 2.
 }
 \author{
-James R Staley <js16174@bristol.ac.uk>
+James R Staley <jrstaley95@gmail.com>
 }
