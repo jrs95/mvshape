@@ -51,5 +51,5 @@ res <- mvshape(y=y, x=x, covar=covar, study=study, family="gaussian")
 mvshape_plot(res)
 }
 \author{
-James R Staley <js16174@bristol.ac.uk>
+James R Staley <jrstaley95@gmail.com>
 }
