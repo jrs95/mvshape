@@ -55,5 +55,5 @@ study <- c(rep("study1",1000),rep("study2",1000),rep("study3",1000),rep("study4"
 res <- mvshape(y=y, x=x, covar=covar, study=study, family="gaussian")
 }
 \author{
-James R Staley <js16174@bristol.ac.uk>
+James R Staley <jrstaley95@gmail.com>
 }
