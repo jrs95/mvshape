@@ -51,5 +51,5 @@ covar <- data.frame(c1=c1, c2=c2)
 res <- fracpoly(y=y, x=x, covar=covar, family="gaussian")
 }
 \author{
-James R Staley <js16174@bristol.ac.uk>
+James R Staley <jrstaley95@gmail.com>
 }
