@@ -276,8 +276,7 @@ mvshape <- function(y=y, x=x, covar=NULL, study=NULL, ngrp=10, refgrp=1, family=
     xse <- c(summary(mvmodel_mean)$coefficients[,2]); names(xse) <- NULL
     xbeta[xse==0] <- x_mean[1,xse==0]
     
-  }
-  else{
+  }else{
     
     # Outcome model
     if(family=="gaussian"){
