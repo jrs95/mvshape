@@ -9,26 +9,30 @@ This package is used to assess the shape of the relationship between an exposure
 * fracpoly_mvshape_plot - this function plots the fractional polynomial and mvshape models
 
 ## Installation
-1. install.packages("devtools")
-2. library(devtools) 
-3. install_github("jrs95/mvshape")
-4. library(mvshape)
+```
+install.packages("devtools")
+library(devtools)
+install_github("jrs95/mvshape")
+library(mvshape)
+```
 
 ## Example
-\#\#\# Data  
-y <- rnorm(5000)  
-x <- rnorm(5000,10,1)  
-c1 <- rbinom(5000,1,0.5)  
-c2 <- rnorm(5000)  
-study <- as.factor(c(rep("study1",1000),rep("study2",1000),rep("study3",1000),rep("study4",1000),rep("study5",1000)))  
-covar <- data.frame(c1=c1, c2=c2, study=study)  
+```
+### Data
+y <- rnorm(5000)
+x <- rnorm(5000, 10, 1)
+c1 <- rbinom(5000, 1, 0.5)
+c2 <- rnorm(5000)
+study <- as.factor(c(rep("study1", 1000), rep("study2", 1000), rep("study3", 1000), rep("study4", 1000), rep("study5", 1000)))
+covar <- data.frame(c1 = c1, c2 = c2, study = study)
 
-\#\#\# Analyses  
-fp <- fracpoly(y=y, x=x, covar=covar, family="gaussian")  
-fracpoly_plot(fp)  
-mvma <- mvshape(y=y, x=x, covar=covar[,c("c1", "c2")], study=study, family="gaussian")  
-mvshape_plot(mvma)  
-fracpoly_mvshape_plot(fracpoly=fp, mvshape=mvma)
+### Analyses
+fp <- fracpoly(y = y, x = x, covar = covar, family = "gaussian")
+fracpoly_plot(fp)
+mvma <- mvshape(y = y, x = x, covar = covar[,c("c1", "c2")], study = study, family = "gaussian")
+mvshape_plot(mvma)
+fracpoly_mvshape_plot(fracpoly = fp, mvshape = mvma)
+```
 
 ## Citation 
 Please cite this R package using the link: https://github.com/jrs95/mvshape
