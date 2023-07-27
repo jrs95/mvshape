@@ -17,7 +17,7 @@ floatvar(V, tol = 0.001, iter.max = 50)
 List of floating point variances, error limits and divergence parameters.
 }
 \description{
-floatvar fits the best fitting fractional polynomial of degree 1 and 2.
+floatvar computes floating point variances.
 }
 \author{
 James R Staley <jrstaley95@gmail.com>
