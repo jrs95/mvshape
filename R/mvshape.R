@@ -225,7 +225,7 @@ summary.fracpoly <- function(x, ...) {
 #' covar <- data.frame(c1 = c1, c2 = c2, study = study)
 #'
 #' # Analyses
-#' res <- mvshape(y = y, x = x, covar = covar, study = study, family = "gaussian")
+#' res <- mvshape(y = y, x = x, covar = covar[, c("c1", "c2")], study = study, family = "gaussian")
 #' @author James Staley <jrstaley95@gmail.com>
 #' @export
 #' @md
@@ -720,7 +720,7 @@ fracpoly_plot <- function(fracpoly, degree = "both", xref = NULL, logx = FALSE, 
 #' covar <- data.frame(c1 = c1, c2 = c2, study = study)
 #'
 #' # Analyses
-#' res <- mvshape(y = y, x = x, covar = covar, study = study, family = "gaussian")
+#' res <- mvshape(y = y, x = x, covar = covar[, c("c1", "c2")], study = study, family = "gaussian")
 #' mvshape_plot(res)
 #' @author James Staley <jrstaley95@gmail.com>
 #' @export

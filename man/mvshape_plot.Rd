@@ -57,7 +57,7 @@ study <- c(rep("study1", 1000), rep("study2", 1000), rep("study3", 1000), rep("s
 covar <- data.frame(c1 = c1, c2 = c2, study = study)
 
 # Analyses
-res <- mvshape(y = y, x = x, covar = covar, study = study, family = "gaussian")
+res <- mvshape(y = y, x = x, covar = covar[, c("c1", "c2")], study = study, family = "gaussian")
 mvshape_plot(res)
 }
 \author{
