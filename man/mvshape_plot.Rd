@@ -4,9 +4,19 @@
 \alias{mvshape_plot}
 \title{mvshape_plot}
 \usage{
-mvshape_plot(mvshape, logx = FALSE, logy = FALSE, pref_x = "x",
-  pref_y = "y", xbreaks = NULL, ybreaks = NULL, betacolour = "red",
-  cicolour = "red", intcolour = "grey", xlim = NULL)
+mvshape_plot(
+  mvshape,
+  logx = FALSE,
+  logy = FALSE,
+  pref_x = "x",
+  pref_y = "y",
+  xbreaks = NULL,
+  ybreaks = NULL,
+  betacolour = "red",
+  cicolour = "red",
+  intcolour = "grey",
+  xlim = NULL
+)
 }
 \arguments{
 \item{mvshape}{a mvshape object.}
@@ -38,18 +48,18 @@ mvshape plot.
 mvshape_plot plots the meta-analysis results against the mean values of the exposure in each group.
 }
 \examples{
-### Data
+# Data
 y <- rnorm(5000)
-x <- rnorm(5000,10,1)
-c1 <- rbinom(5000,1,0.5)
+x <- rnorm(5000, 10, 1)
+c1 <- rbinom(5000, 1, 0.5)
 c2 <- rnorm(5000)
-covar <- data.frame(c1=c1, c2=c2)
-study <- c(rep("study1",1000),rep("study2",1000),rep("study3",1000),rep("study4",1000),rep("study5",1000))
+study <- c(rep("study1", 1000), rep("study2", 1000), rep("study3", 1000), rep("study4", 1000), rep("study5", 1000))
+covar <- data.frame(c1 = c1, c2 = c2, study = study)
 
-### Analyses
-res <- mvshape(y=y, x=x, covar=covar, study=study, family="gaussian")
+# Analyses
+res <- mvshape(y = y, x = x, covar = covar, study = study, family = "gaussian")
 mvshape_plot(res)
 }
 \author{
-James R Staley <jrstaley95@gmail.com>
+James Staley \href{mailto:jrstaley95@gmail.com}{jrstaley95@gmail.com}
 }

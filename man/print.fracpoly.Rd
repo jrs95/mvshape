@@ -7,11 +7,11 @@
 \method{print}{fracpoly}(x, ...)
 }
 \arguments{
-\item{x}{an object of class "fracpoly".}
+\item{x}{an object of class \code{"fracpoly"}.}
 }
 \description{
-print method for class "fracpoly".
+print method for class \code{"fracpoly"}.
 }
 \author{
-James R Staley <jrstaley95@gmail.com>
+James Staley \href{mailto:jrstaley95@gmail.com}{jrstaley95@gmail.com}
 }

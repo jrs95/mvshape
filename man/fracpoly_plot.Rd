@@ -4,10 +4,21 @@
 \alias{fracpoly_plot}
 \title{fracpoly_plot}
 \usage{
-fracpoly_plot(fracpoly, degree = "both", xref = NULL, logx = FALSE,
-  logy = FALSE, pref_x = "x", pref_y = "y", xbreaks = NULL,
-  ybreaks = NULL, cicolour = "grey", betacolour = "black",
-  intcolour = "grey", xlim = NULL)
+fracpoly_plot(
+  fracpoly,
+  degree = "both",
+  xref = NULL,
+  logx = FALSE,
+  logy = FALSE,
+  pref_x = "x",
+  pref_y = "y",
+  xbreaks = NULL,
+  ybreaks = NULL,
+  cicolour = "grey",
+  betacolour = "black",
+  intcolour = "grey",
+  xlim = NULL
+)
 }
 \arguments{
 \item{fracpoly}{a fracpoly object.}
@@ -43,17 +54,18 @@ fractional polynomial plot.
 fracpoly_plot plots the best fitting fractional polynomial.
 }
 \examples{
-### Data
+# Data
 y <- rnorm(5000)
-x <- rnorm(5000,10,1)
-c1 <- rbinom(5000,1,0.5)
+x <- rnorm(5000, 10, 1)
+c1 <- rbinom(5000, 1, 0.5)
 c2 <- rnorm(5000)
-covar <- data.frame(c1=c1, c2=c2)
+study <- c(rep("study1", 1000), rep("study2", 1000), rep("study3", 1000), rep("study4", 1000), rep("study5", 1000))
+covar <- data.frame(c1 = c1, c2 = c2, study = study)
 
-### Analyses
-res <- fracpoly(y=y, x=x, covar=covar, family="gaussian")
-fracploy_plot(res)
+# Analyses
+res <- fracpoly(y = y, x = x, covar = covar, family = "gaussian")
+fracpoly_plot(res)
 }
 \author{
-James R Staley <jrstaley95@gmail.com>
+James Staley \href{mailto:jrstaley95@gmail.com}{jrstaley95@gmail.com}
 }

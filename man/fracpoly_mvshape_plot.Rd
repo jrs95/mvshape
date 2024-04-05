@@ -4,11 +4,25 @@
 \alias{fracpoly_mvshape_plot}
 \title{fracpoly_mvshape_plot}
 \usage{
-fracpoly_mvshape_plot(fracpoly, degree = "both", mvshape, xref = NULL,
-  logx = FALSE, logy = FALSE, pref_x = "x", pref_y = "y",
-  xbreaks = NULL, ybreaks = NULL, cicolour = "grey",
-  betacolour = "black", intcolour = "grey", mvbetacolour = "red",
-  mvcicolour = "red", xlim = NULL, ylim = NULL)
+fracpoly_mvshape_plot(
+  fracpoly,
+  degree = "both",
+  mvshape,
+  xref = NULL,
+  logx = FALSE,
+  logy = FALSE,
+  pref_x = "x",
+  pref_y = "y",
+  xbreaks = NULL,
+  ybreaks = NULL,
+  cicolour = "grey",
+  betacolour = "black",
+  intcolour = "grey",
+  mvbetacolour = "red",
+  mvcicolour = "red",
+  xlim = NULL,
+  ylim = NULL
+)
 }
 \arguments{
 \item{fracpoly}{a fracpoly object.}
@@ -46,18 +60,21 @@ fractional polynomial and mvshape plot.
 fracpoly_mvshape_plot overlays the fractional polynomial plot with the mvshape plot.
 }
 \examples{
-### Data
+\dontrun{
+# Data
 y <- rnorm(5000)
-x <- rnorm(5000,10,1)
-c1 <- rbinom(5000,1,0.5)
+x <- rnorm(5000, 10, 1)
+c1 <- rbinom(5000, 1, 0.5)
 c2 <- rnorm(5000)
-covar <- data.frame(c1=c1, c2=c2)
-study <- c(rep("study1",1000),rep("study2",1000),rep("study3",1000),rep("study4",1000),rep("study5",1000))
+study <- c(rep("study1", 1000), rep("study2", 1000), rep("study3", 1000), rep("study4", 1000), rep("study5", 1000))
+covar <- data.frame(c1 = c1, c2 = c2, study = study)
 
-### Analyses
-res <- mvshape(y=y, x=x, covar=covar, study=study, family="gaussian")
-fracpoly_mvshape_plot(res)
+# Analyses
+fp <- fracpoly(y = y, x = x, covar = covar, family = "gaussian")
+mvma <- mvshape(y = y, x = x, covar = covar[, c("c1", "c2")], study = study, family = "gaussian")
+fracpoly_mvshape_plot(fracpoly = fp, mvshape = mvma)
+}
 }
 \author{
-James R Staley <jrstaley95@gmail.com>
+James Staley \href{mailto:jrstaley95@gmail.com}{jrstaley95@gmail.com}
 }

@@ -7,11 +7,11 @@
 \method{summary}{mvshape}(x, ...)
 }
 \arguments{
-\item{x}{an object of class "mvshape".}
+\item{x}{an object of class \code{"mvshape"}.}
 }
 \description{
-summary method for class "mvshape".
+summary method for class \code{"mvshape"}.
 }
 \author{
-James R Staley <jrstaley95@gmail.com>
+James Staley \href{mailto:jrstaley95@gmail.com}{jrstaley95@gmail.com}
 }

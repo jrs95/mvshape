@@ -16,7 +16,7 @@ fracpoly(y = y, x = x, covar = NULL, family = "gaussian")
 \item{family}{the glm family (options: gaussian and binomial).}
 }
 \value{
-List of best fitting polynomials of degrees 1 and 2 as well as associated statistics.
+List of best-fitting polynomials of degrees 1 and 2 as well as associated statistics.
 
 \item{power_d1}{power of the best-fitting fractional polynomial of degree 1}
 
@@ -40,16 +40,17 @@ List of best fitting polynomials of degrees 1 and 2 as well as associated statis
 fracpoly fits the best fitting fractional polynomial of degree 1 and 2.
 }
 \examples{
-### Data
+# Data
 y <- rnorm(5000)
-x <- rnorm(5000,10,1)
-c1 <- rbinom(5000,1,0.5)
+x <- rnorm(5000, 10, 1)
+c1 <- rbinom(5000, 1, 0.5)
 c2 <- rnorm(5000)
-covar <- data.frame(c1=c1, c2=c2)
+study <- c(rep("study1", 1000), rep("study2", 1000), rep("study3", 1000), rep("study4", 1000), rep("study5", 1000))
+covar <- data.frame(c1 = c1, c2 = c2, study = study)
 
-### Analyses
-res <- fracpoly(y=y, x=x, covar=covar, family="gaussian")
+# Analyses
+res <- fracpoly(y = y, x = x, covar = covar, family = "gaussian")
 }
 \author{
-James R Staley <jrstaley95@gmail.com>
+James Staley \href{mailto:jrstaley95@gmail.com}{jrstaley95@gmail.com}
 }

@@ -4,8 +4,17 @@
 \alias{mvshape}
 \title{mvshape}
 \usage{
-mvshape(y = y, x = x, covar = NULL, study = NULL, ngrp = 10,
-  refgrp = 1, family = "gaussian", float = FALSE, method = "reml")
+mvshape(
+  y = y,
+  x = x,
+  covar = NULL,
+  study = NULL,
+  ngrp = 10,
+  refgrp = 1,
+  family = "gaussian",
+  float = FALSE,
+  method = "reml"
+)
 }
 \arguments{
 \item{y}{outcome.}
@@ -43,17 +52,17 @@ List of multivariate meta-analysis results for each group.
 mvshape fits a multivariate meta-analysis for groups of the exposure (e.g. deciles).
 }
 \examples{
-### Data
+# Data
 y <- rnorm(5000)
-x <- rnorm(5000,10,1)
-c1 <- rbinom(5000,1,0.5)
+x <- rnorm(5000, 10, 1)
+c1 <- rbinom(5000, 1, 0.5)
 c2 <- rnorm(5000)
-covar <- data.frame(c1=c1, c2=c2)
-study <- c(rep("study1",1000),rep("study2",1000),rep("study3",1000),rep("study4",1000),rep("study5",1000))
+study <- c(rep("study1", 1000), rep("study2", 1000), rep("study3", 1000), rep("study4", 1000), rep("study5", 1000))
+covar <- data.frame(c1 = c1, c2 = c2, study = study)
 
-### Analyses
-res <- mvshape(y=y, x=x, covar=covar, study=study, family="gaussian")
+# Analyses
+res <- mvshape(y = y, x = x, covar = covar, study = study, family = "gaussian")
 }
 \author{
-James R Staley <jrstaley95@gmail.com>
+James Staley \href{mailto:jrstaley95@gmail.com}{jrstaley95@gmail.com}
 }
